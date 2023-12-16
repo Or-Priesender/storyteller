@@ -1,0 +1,9 @@
+@import './base.css';
+
+#app {
+  /* background-image: url("@/assets/background.png"); */
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2vh 5vw;
+  font-weight: normal;
+}
