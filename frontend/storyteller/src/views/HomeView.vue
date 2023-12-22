@@ -29,7 +29,7 @@ const addTopic = () => {
 }
 
 const generate = async (event: SubmitEvent) => {
-  const client = new StoryGeneratorClient(new GrpcWebFetchTransport({"baseUrl": "http://127.0.0.1:8080"}))
+  const client = new StoryGeneratorClient(new GrpcWebFetchTransport({"baseUrl": "https://storyteller-proxy-2v74mbo73q-zf.a.run.app"}))
   const story = await client.generateStory({topics: topics.value, length: 200})
   store.setGeneratedStory(story.response.story)
   router.push('/story')
