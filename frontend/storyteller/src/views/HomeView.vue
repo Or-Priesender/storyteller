@@ -30,11 +30,6 @@ const addTopic = () => {
 
 const generate = async (event: SubmitEvent) => {
   const client = new StoryGeneratorClient(new GrpcWebFetchTransport({"baseUrl": "http://127.0.0.1:8080"}))
-  // @ts-ignore
-  // const enableDevTools = window.__GRPCWEB_DEVTOOLS__ || undefined
-  // enableDevTools?.([
-  //   client,
-  // ])
   const story = await client.generateStory({topics: topics.value, length: 200})
   store.setGeneratedStory(story.response.story)
   router.push('/story')
@@ -107,7 +102,7 @@ const add = () => {
 
 .search {
   margin-top: 1rem;
-  width: 30vh;
+  width: 30vw;
 }
 
 .button {

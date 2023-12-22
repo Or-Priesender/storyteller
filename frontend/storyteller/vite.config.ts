@@ -7,6 +7,7 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/storyteller/",
   plugins: [
     vue(),
     vueJsx(),
