@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net"
+	"os"
 	"storyteller/ai"
 	pb "storyteller/api"
 	"strings"
@@ -51,7 +52,12 @@ func (s *storyGeneratorServer) GenerateStory(ctx context.Context, topics *pb.Top
 }
 
 func main() {
-	listener, err := net.Listen("tcp", "0.0.0.0:9090")
+	port, is_port_externally_set := os.LookupEnv("PORT")
+	if !is_port_externally_set {
+		port = "9090"
+	}
+
+	listener, err := net.Listen("tcp", "0.0.0.0:"+port)
 	if err != nil {
 		fmt.Println("Error starting tcp server", err)
 		return
@@ -59,6 +65,6 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterStoryGeneratorServer(grpcServer, &storyGeneratorServer{})
-	fmt.Println("Starting to serve")
+	fmt.Println("Starting to serve on port " + port)
 	grpcServer.Serve(listener)
 }
