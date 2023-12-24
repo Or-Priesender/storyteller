@@ -17,6 +17,7 @@ import Logo from '@/components/Logo.vue'
   flex-direction: column;
   text-align: center;
   align-items: center;
+  background-color: var(--color-card);
   padding: 1rem;
   min-height: 95vh;
 }
@@ -28,7 +29,7 @@ header {
 .logo {
   display: block;
   margin: 0 auto 2rem;
-  color: var(--var-brown);
+  color: var(--color-text);
 }
 
 </style>

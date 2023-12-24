@@ -221,6 +221,6 @@
 
 <style scoped>
     svg {
-        fill: var(--var-brown);
+        fill: var(--color-logo);
     }
 </style>

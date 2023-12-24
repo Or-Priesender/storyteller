@@ -41,14 +41,14 @@ type storyGeneratorServer struct {
 
 func (s *storyGeneratorServer) GenerateStory(ctx context.Context, topics *pb.Topics) (*pb.Story, error) {
 	fmt.Printf("Received request to generate a story with %d words\n", *topics.Length)
-	story, err := ai.GenerateStory(topics.Topics, *topics.Length)
+	response, err := ai.GenerateStory(topics.Topics, *topics.Length)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "Could not generate story from given topics")
 	}
 
-	pages := int32(len(strings.Split(story, " ")) / 25)
+	pages := int32(len(strings.Split(response.Story, "\n\n")))
 	fmt.Printf("Generated story with %d pages\n", pages)
-	return &pb.Story{Story: story, Pages: pages}, nil
+	return &pb.Story{Story: response.Story, Pages: pages}, nil
 }
 
 func main() {

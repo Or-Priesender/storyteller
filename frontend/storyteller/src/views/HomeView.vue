@@ -1,7 +1,5 @@
 <script setup lang="ts" module="true">
-import { StoryGeneratorClient } from '@/client/api.client';
 import { ref, type Ref } from 'vue';
-import { GrpcWebFetchTransport } from '@protobuf-ts/grpcweb-transport'
 import { store } from '@/store/store'
 import { useRouter } from 'vue-router';
 
@@ -29,10 +27,7 @@ const addTopic = () => {
 }
 
 const generate = async (event: SubmitEvent) => {
-  const client = new StoryGeneratorClient(new GrpcWebFetchTransport({"baseUrl": "https://storyteller-proxy-2v74mbo73q-zf.a.run.app"}))
-  const story = await client.generateStory({topics: topics.value, length: 200})
-  store.setGeneratedStory(story.response.story)
-  router.push('/story')
+  await Promise.all([router.push('/story'), store.generateStory(topics.value)])
 }
 
 const reset = () => {
@@ -54,7 +49,7 @@ const add = () => {
 <template>
       <div class="home">
         <div class="instructions">
-          Search and add up to 5 topics, then hit "Generate" to generate a story.
+          Add up to 5 topics, then hit "Generate" to generate a story
         </div>
         <v-form class="topics-form" ref="topicsForm">
           <div class="topics-container">
@@ -87,7 +82,7 @@ const add = () => {
   flex-direction: column;
   align-items: center;
   flex: 1;
-  color: var(--var-brown);  
+  color: var(--color-text);  
 }
 
 .instructions {
@@ -96,18 +91,18 @@ const add = () => {
   font-size: 1.2rem;
   margin: 0 1.2rem;
   flex: 1;
-  font-family: fantasy;
   font-weight: 500;
 }
 
 .search {
   margin-top: 1rem;
   width: 30vw;
+  color: var(--color-text);
 }
 
 .button {
   margin-bottom: 1rem;
-  color: var(--var-brown);
+  color: var(--color-button);
 }
 
 .topics-form {
