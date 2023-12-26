@@ -34,6 +34,7 @@
   --color-background: var(--var-light-brown);
   --color-logo: var(--var-pink);
   --color-text: var(--var-pink);
+  --color-error-text: var(--var-pink);
   --color-pages: var(--var-pink);
   --color-button: var(--var-pink);
   --color-card: var(--var-light-blue);

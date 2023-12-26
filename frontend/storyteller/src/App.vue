@@ -19,7 +19,7 @@ import Logo from '@/components/Logo.vue'
   align-items: center;
   background-color: var(--color-card);
   padding: 1rem;
-  min-height: 95vh;
+  height: 95vh;
 }
 
 header {

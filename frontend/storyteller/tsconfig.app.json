@@ -13,4 +13,5 @@
     "vuetify",
   ],
   "noImplicitThis": false,
+  "noImplicitAny": true,
 }

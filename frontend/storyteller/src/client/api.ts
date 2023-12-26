@@ -12,9 +12,9 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 /**
- * @generated from protobuf message api.Topics
+ * @generated from protobuf message api.GenerateStoryRequest
  */
-export interface Topics {
+export interface GenerateStoryRequest {
     /**
      * @generated from protobuf field: repeated string topics = 1;
      */
@@ -25,38 +25,34 @@ export interface Topics {
     length?: number;
 }
 /**
- * @generated from protobuf message api.Story
+ * @generated from protobuf message api.GenerateStoryResponse
  */
-export interface Story {
+export interface GenerateStoryResponse {
     /**
-     * @generated from protobuf field: string story = 1;
+     * @generated from protobuf field: repeated string pages = 1;
      */
-    story: string;
+    pages: string[];
     /**
-     * @generated from protobuf field: int32 pages = 2;
+     * @generated from protobuf field: repeated string images = 2;
      */
-    pages: number;
-    /**
-     * @generated from protobuf field: string delimiter = 3;
-     */
-    delimiter: string;
+    images: string[];
 }
 // @generated message type with reflection information, may provide speed optimized methods
-class Topics$Type extends MessageType<Topics> {
+class GenerateStoryRequest$Type extends MessageType<GenerateStoryRequest> {
     constructor() {
-        super("api.Topics", [
+        super("api.GenerateStoryRequest", [
             { no: 1, name: "topics", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "length", kind: "scalar", opt: true, T: 5 /*ScalarType.INT32*/ }
         ]);
     }
-    create(value?: PartialMessage<Topics>): Topics {
+    create(value?: PartialMessage<GenerateStoryRequest>): GenerateStoryRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.topics = [];
         if (value !== undefined)
-            reflectionMergePartial<Topics>(this, message, value);
+            reflectionMergePartial<GenerateStoryRequest>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Topics): Topics {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GenerateStoryRequest): GenerateStoryRequest {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
@@ -78,7 +74,7 @@ class Topics$Type extends MessageType<Topics> {
         }
         return message;
     }
-    internalBinaryWrite(message: Topics, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+    internalBinaryWrite(message: GenerateStoryRequest, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
         /* repeated string topics = 1; */
         for (let i = 0; i < message.topics.length; i++)
             writer.tag(1, WireType.LengthDelimited).string(message.topics[i]);
@@ -92,40 +88,35 @@ class Topics$Type extends MessageType<Topics> {
     }
 }
 /**
- * @generated MessageType for protobuf message api.Topics
+ * @generated MessageType for protobuf message api.GenerateStoryRequest
  */
-export const Topics = new Topics$Type();
+export const GenerateStoryRequest = new GenerateStoryRequest$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class Story$Type extends MessageType<Story> {
+class GenerateStoryResponse$Type extends MessageType<GenerateStoryResponse> {
     constructor() {
-        super("api.Story", [
-            { no: 1, name: "story", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "pages", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 3, name: "delimiter", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        super("api.GenerateStoryResponse", [
+            { no: 1, name: "pages", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "images", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
-    create(value?: PartialMessage<Story>): Story {
+    create(value?: PartialMessage<GenerateStoryResponse>): GenerateStoryResponse {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.story = "";
-        message.pages = 0;
-        message.delimiter = "";
+        message.pages = [];
+        message.images = [];
         if (value !== undefined)
-            reflectionMergePartial<Story>(this, message, value);
+            reflectionMergePartial<GenerateStoryResponse>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: Story): Story {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: GenerateStoryResponse): GenerateStoryResponse {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string story */ 1:
-                    message.story = reader.string();
+                case /* repeated string pages */ 1:
+                    message.pages.push(reader.string());
                     break;
-                case /* int32 pages */ 2:
-                    message.pages = reader.int32();
-                    break;
-                case /* string delimiter */ 3:
-                    message.delimiter = reader.string();
+                case /* repeated string images */ 2:
+                    message.images.push(reader.string());
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -138,16 +129,13 @@ class Story$Type extends MessageType<Story> {
         }
         return message;
     }
-    internalBinaryWrite(message: Story, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string story = 1; */
-        if (message.story !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.story);
-        /* int32 pages = 2; */
-        if (message.pages !== 0)
-            writer.tag(2, WireType.Varint).int32(message.pages);
-        /* string delimiter = 3; */
-        if (message.delimiter !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.delimiter);
+    internalBinaryWrite(message: GenerateStoryResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* repeated string pages = 1; */
+        for (let i = 0; i < message.pages.length; i++)
+            writer.tag(1, WireType.LengthDelimited).string(message.pages[i]);
+        /* repeated string images = 2; */
+        for (let i = 0; i < message.images.length; i++)
+            writer.tag(2, WireType.LengthDelimited).string(message.images[i]);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -155,12 +143,12 @@ class Story$Type extends MessageType<Story> {
     }
 }
 /**
- * @generated MessageType for protobuf message api.Story
+ * @generated MessageType for protobuf message api.GenerateStoryResponse
  */
-export const Story = new Story$Type();
+export const GenerateStoryResponse = new GenerateStoryResponse$Type();
 /**
  * @generated ServiceType for protobuf service api.StoryGenerator
  */
 export const StoryGenerator = new ServiceType("api.StoryGenerator", [
-    { name: "GenerateStory", options: {}, I: Topics, O: Story }
+    { name: "GenerateStory", options: {}, I: GenerateStoryRequest, O: GenerateStoryResponse }
 ]);

@@ -5,8 +5,8 @@ import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { StoryGenerator } from "./api";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { Story } from "./api";
-import type { Topics } from "./api";
+import type { GenerateStoryResponse } from "./api";
+import type { GenerateStoryRequest } from "./api";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 /**
@@ -14,9 +14,9 @@ import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
  */
 export interface IStoryGeneratorClient {
     /**
-     * @generated from protobuf rpc: GenerateStory(api.Topics) returns (api.Story);
+     * @generated from protobuf rpc: GenerateStory(api.GenerateStoryRequest) returns (api.GenerateStoryResponse);
      */
-    generateStory(input: Topics, options?: RpcOptions): UnaryCall<Topics, Story>;
+    generateStory(input: GenerateStoryRequest, options?: RpcOptions): UnaryCall<GenerateStoryRequest, GenerateStoryResponse>;
 }
 /**
  * @generated from protobuf service api.StoryGenerator
@@ -28,10 +28,10 @@ export class StoryGeneratorClient implements IStoryGeneratorClient, ServiceInfo 
     constructor(private readonly _transport: RpcTransport) {
     }
     /**
-     * @generated from protobuf rpc: GenerateStory(api.Topics) returns (api.Story);
+     * @generated from protobuf rpc: GenerateStory(api.GenerateStoryRequest) returns (api.GenerateStoryResponse);
      */
-    generateStory(input: Topics, options?: RpcOptions): UnaryCall<Topics, Story> {
+    generateStory(input: GenerateStoryRequest, options?: RpcOptions): UnaryCall<GenerateStoryRequest, GenerateStoryResponse> {
         const method = this.methods[0], opt = this._transport.mergeOptions(options);
-        return stackIntercept<Topics, Story>("unary", this._transport, method, opt, input);
+        return stackIntercept<GenerateStoryRequest, GenerateStoryResponse>("unary", this._transport, method, opt, input);
     }
 }

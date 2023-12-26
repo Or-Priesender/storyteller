@@ -13,11 +13,12 @@ const rules = [
 ]
 
 const validateTopic = (topic: string) => {
-  return topic && topic.length > 2 // add more validations
+  return topic && topic.length > 2
 }
 
 const addTopic = () => {
   if (topics.value.length == 5) {
+    // FIFO the topics list
     topics.value.shift()
     topics.value.push(text.value)
   } else {
@@ -27,7 +28,7 @@ const addTopic = () => {
 }
 
 const generate = async (event: SubmitEvent) => {
-  await Promise.all([router.push('/story'), store.generateStory(topics.value)])
+  await router.push({name: 'story', query: {topics: topics.value}})
 }
 
 const reset = () => {
@@ -92,6 +93,7 @@ const add = () => {
   margin: 0 1.2rem;
   flex: 1;
   font-weight: 500;
+  align-items: center;
 }
 
 .search {
