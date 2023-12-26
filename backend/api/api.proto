@@ -2,17 +2,16 @@ syntax="proto3";
 package api;
 option go_package="./api";
 
-message Topics {
+message GenerateStoryRequest {
 	repeated string topics = 1;
 	optional int32 length = 2;
 }
 
-message Story {
-	string story = 1;
-	int32 pages = 2;
-	string delimiter = 3;
+message GenerateStoryResponse {
+	repeated string pages = 1;
+	repeated string images = 2;
 }
 
 service StoryGenerator {
-    rpc GenerateStory(Topics) returns (Story) {};
+    rpc GenerateStory(GenerateStoryRequest) returns (GenerateStoryResponse) {};
 }

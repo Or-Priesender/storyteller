@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type StoryGeneratorClient interface {
-	GenerateStory(ctx context.Context, in *Topics, opts ...grpc.CallOption) (*Story, error)
+	GenerateStory(ctx context.Context, in *GenerateStoryRequest, opts ...grpc.CallOption) (*GenerateStoryResponse, error)
 }
 
 type storyGeneratorClient struct {
@@ -33,8 +33,8 @@ func NewStoryGeneratorClient(cc grpc.ClientConnInterface) StoryGeneratorClient {
 	return &storyGeneratorClient{cc}
 }
 
-func (c *storyGeneratorClient) GenerateStory(ctx context.Context, in *Topics, opts ...grpc.CallOption) (*Story, error) {
-	out := new(Story)
+func (c *storyGeneratorClient) GenerateStory(ctx context.Context, in *GenerateStoryRequest, opts ...grpc.CallOption) (*GenerateStoryResponse, error) {
+	out := new(GenerateStoryResponse)
 	err := c.cc.Invoke(ctx, "/api.StoryGenerator/GenerateStory", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *storyGeneratorClient) GenerateStory(ctx context.Context, in *Topics, op
 // All implementations must embed UnimplementedStoryGeneratorServer
 // for forward compatibility
 type StoryGeneratorServer interface {
-	GenerateStory(context.Context, *Topics) (*Story, error)
+	GenerateStory(context.Context, *GenerateStoryRequest) (*GenerateStoryResponse, error)
 	mustEmbedUnimplementedStoryGeneratorServer()
 }
 
@@ -54,7 +54,7 @@ type StoryGeneratorServer interface {
 type UnimplementedStoryGeneratorServer struct {
 }
 
-func (UnimplementedStoryGeneratorServer) GenerateStory(context.Context, *Topics) (*Story, error) {
+func (UnimplementedStoryGeneratorServer) GenerateStory(context.Context, *GenerateStoryRequest) (*GenerateStoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateStory not implemented")
 }
 func (UnimplementedStoryGeneratorServer) mustEmbedUnimplementedStoryGeneratorServer() {}
@@ -71,7 +71,7 @@ func RegisterStoryGeneratorServer(s grpc.ServiceRegistrar, srv StoryGeneratorSer
 }
 
 func _StoryGenerator_GenerateStory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Topics)
+	in := new(GenerateStoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func _StoryGenerator_GenerateStory_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/api.StoryGenerator/GenerateStory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StoryGeneratorServer).GenerateStory(ctx, req.(*Topics))
+		return srv.(StoryGeneratorServer).GenerateStory(ctx, req.(*GenerateStoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

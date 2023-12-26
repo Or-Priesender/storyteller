@@ -39,16 +39,16 @@ type storyGeneratorServer struct {
 	pb.UnimplementedStoryGeneratorServer
 }
 
-func (s *storyGeneratorServer) GenerateStory(ctx context.Context, topics *pb.Topics) (*pb.Story, error) {
-	fmt.Printf("Received request to generate a story with %d words\n", *topics.Length)
+func (s *storyGeneratorServer) GenerateStory(ctx context.Context, topics *pb.GenerateStoryRequest) (*pb.GenerateStoryResponse, error) {
+	fmt.Printf("Received request to generate a story with %d words about %s\n", *topics.Length, strings.Join(topics.Topics, ","))
 	response, err := ai.GenerateStory(topics.Topics, *topics.Length)
 	if err != nil {
 		return nil, status.Error(codes.NotFound, "Could not generate story from given topics")
 	}
 
-	pages := int32(len(strings.Split(response.Story, "\n\n")))
-	fmt.Printf("Generated story with %d pages\n", pages)
-	return &pb.Story{Story: response.Story, Pages: pages}, nil
+	pages := strings.Split(response.Story, "\n\n")
+	fmt.Printf("Generated story with %d pages\n", len(pages))
+	return &pb.GenerateStoryResponse{Pages: pages, Images: response.Images}, nil
 }
 
 func main() {
