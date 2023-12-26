@@ -13,5 +13,6 @@
     "vuetify",
   ],
   "noImplicitThis": false,
+  "strictNullChecks": false,
   "noImplicitAny": true,
 }

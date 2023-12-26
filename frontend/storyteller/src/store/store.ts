@@ -4,17 +4,20 @@ import { StoryGeneratorClient } from '@/client/api.client'
 
 const client = new StoryGeneratorClient(new GrpcWebFetchTransport({ "baseUrl": import.meta.env.PROD ? "https://storyteller-proxy-2v74mbo73q-zf.a.run.app" : "http://127.0.0.1:8080" }))
 
+// This is needed because Typescript insists on assigning "never[]" to empty arrays
+const emptyArray: any[] = []
+
 export const store = reactive({
     topics: [""],
-    generatedStory: [],
-    generatedImages: [],
+    generatedStory: emptyArray,
+    generatedImages: emptyArray,
     generatedStoryError: "",
     loading: false,
     client: client,
     resetStory() {
         console.log("Resetting story")
-        this.generatedStory = []
-        this.generatedImages = []
+        this.generatedStory = emptyArray
+        this.generatedImages = emptyArray
     },
     async generateStory(topics: string[], length: number = 200) {
         const story = await this.client.generateStory({ topics: topics, length: length })
