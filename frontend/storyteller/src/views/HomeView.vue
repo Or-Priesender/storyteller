@@ -50,7 +50,7 @@ const input: Ref<HTMLInputElement | undefined> = ref()
 window.addEventListener("resize", e => {
   input.value?.scrollIntoView()
 })
-
+  
 </script>
 
 <template>
