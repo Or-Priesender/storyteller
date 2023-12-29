@@ -48,8 +48,10 @@ const add = () => {
 
 const scroll = (focused: boolean) => {
   if (focused) {
-    console.log("scrolling to input", focused)
-    input.value?.scrollIntoView()
+    setTimeout(() => {
+      console.log("scrolling to input", focused)
+      input.value?.scrollIntoView()
+    }, 1000)
   }
 }
 </script>
