@@ -45,6 +45,8 @@ const add = () => {
   addTopic()
 }
 
+const input = window.addEventListener("resize", e => document.getElementById("input")?.scrollIntoView())
+
 </script>
 
 <template>
@@ -57,8 +59,9 @@ const add = () => {
             <v-chip close @click:close="reset" variant="outlined" class="topic ma-2"  v-for="topic in topics">{{ topic }}
             </v-chip>
           </div>
-          <v-text-field 
-            class="search"
+          <v-text-field
+            id="input"
+            class="input"
             validate-on="lazy submit"
             variant="outlined" 
             label="Insert topic" 
@@ -96,7 +99,7 @@ const add = () => {
   align-items: center;
 }
 
-.search {
+.input {
   margin-top: 1rem;
   width: 30vw;
   color: var(--color-text);
