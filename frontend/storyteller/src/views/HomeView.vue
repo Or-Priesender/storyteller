@@ -51,7 +51,7 @@ const scroll = (focused: boolean) => {
     setTimeout(() => {
       console.log("scrolling to input", focused)
       input.value?.scrollIntoView()
-    }, 1000)
+    }, 500)
   }
 }
 </script>
