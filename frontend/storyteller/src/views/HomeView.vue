@@ -7,6 +7,7 @@ const router = useRouter()
 const topics: Ref<string[]> = ref([])
 const text: Ref<string> = ref("")
 const topicsForm: Ref<HTMLFormElement | null> = ref(null)
+const input: Ref<HTMLInputElement | undefined> = ref()
 const rules = [
   (v: string) => !!v || 'Topic must not be empty',
   (v: string) => (v && v.length > 2) || 'Topic must be longer than 2 characters'
@@ -45,12 +46,12 @@ const add = () => {
   addTopic()
 }
 
-const input: Ref<HTMLInputElement | undefined> = ref()
-
-window.addEventListener("resize", e => {
-  input.value?.scrollIntoView()
-})
-  
+const scroll = (focused: boolean) => {
+  if (focused) {
+    console.log("scrolling to input", focused)
+    input.value?.scrollIntoView()
+  }
+}
 </script>
 
 <template>
@@ -67,6 +68,7 @@ window.addEventListener("resize", e => {
             id="input"
             class="input"
             ref="input"
+            @update:focused="scroll"
             validate-on="lazy submit"
             variant="outlined" 
             label="Insert topic" 
