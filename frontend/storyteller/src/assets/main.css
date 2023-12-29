@@ -6,4 +6,5 @@
   margin: 0 auto;
   padding: 2vh 5vw;
   font-weight: normal;
+  scroll-behavior: smooth;
 }

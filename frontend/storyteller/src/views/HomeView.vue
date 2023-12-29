@@ -46,14 +46,10 @@ const add = () => {
   addTopic()
 }
 
-const scroll = (focused: boolean) => {
-  if (focused) {
-    setTimeout(() => {
-      console.log("scrolling to input", focused)
-      input.value?.scrollIntoView()
-    }, 500)
-  }
-}
+window.visualViewport?.addEventListener("resize", () => {
+  console.log("visual view port resized")
+  input.value?.scrollIntoView()
+})
 </script>
 
 <template>
@@ -70,7 +66,6 @@ const scroll = (focused: boolean) => {
             id="input"
             class="input"
             ref="input"
-            @update:focused="scroll"
             validate-on="lazy submit"
             variant="outlined" 
             label="Insert topic" 
