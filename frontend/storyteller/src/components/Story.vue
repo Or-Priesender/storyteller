@@ -37,8 +37,6 @@ try {
 
 const pages = mergeTextAndImages(store.generatedStory, store.generatedImages)
 
-console.log("pages count is", pages.length)
-console.log("current page", store.generatedStory[currentPage.value - 1])
 
 const goBack = async () => {
     console.log("goBack is called")
@@ -92,6 +90,7 @@ interface PageMapping {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     flex: 1;
     font-weight: 600;

@@ -45,7 +45,11 @@ const add = () => {
   addTopic()
 }
 
-const input = window.addEventListener("resize", e => document.getElementById("input")?.scrollIntoView())
+const input: Ref<HTMLInputElement | undefined> = ref()
+
+window.addEventListener("resize", e => {
+  input.value?.scrollIntoView()
+})
 
 </script>
 
@@ -62,6 +66,7 @@ const input = window.addEventListener("resize", e => document.getElementById("in
           <v-text-field
             id="input"
             class="input"
+            ref="input"
             validate-on="lazy submit"
             variant="outlined" 
             label="Insert topic" 
