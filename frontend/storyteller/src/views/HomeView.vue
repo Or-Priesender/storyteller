@@ -17,8 +17,10 @@ const addTopic = (topic: string) => {
     topics.value.shift()
   }
 
-  topics.value.push(topic)
   text.value = ""
+  if (topics.value.indexOf(topic) === -1) {
+    topics.value.push(topic)
+  }
 }
 
 const generate = async (event: SubmitEvent) => {
@@ -29,17 +31,18 @@ const generate = async (event: SubmitEvent) => {
   await router.push({name: 'story', query: {topics: topics.value}})
 }
 
-const reset = () => {
-  topics.value = []
-  text.value = ""
-}
-
 const add = () => {
   if (!validateTopic(text.value)) {
     return
   }
 
   addTopic(text.value)
+}
+
+const closeTopic = (closedTopic: string) => {
+  console.log('splicing index', closedTopic, topics.value)
+  topics.value = topics.value.filter(topic => topic !== closedTopic)
+  console.log('left with', topics.value)
 }
 
 window.visualViewport?.addEventListener("resize", () => {
@@ -52,10 +55,9 @@ window.visualViewport?.addEventListener("resize", () => {
         <div class="instructions">
           Generate a children's book, using GPT for text and DALL-E for images
         </div>
-        <v-form class="topics-form">
+        <v-form class="topics-form" @submit.prevent="add">
           <div class="topics-container">
-            <v-chip variant="outlined" class="topic ma-2"  v-for="topic in topics">{{ topic }}
-            </v-chip>
+              <v-chip variant="outlined" class="topic" closable @click:close="(e: Event) => closeTopic(topic)" :key="index + '_' + topic" v-for="(topic, index) in topics">{{ topic }}</v-chip>
           </div>
           <v-text-field
             id="input"
@@ -66,12 +68,12 @@ window.visualViewport?.addEventListener("resize", () => {
             type="text" 
             density="compact"
             v-model="text"
+            append-inner-icon="mdi-arrow-right"
+            @click:append-inner.prevent="add"
           />
 
           <v-row class="ma-4 buttons-container" align-content="space-around">
-            <v-btn @click.prevent="add" type="submit" size="x-small" class="button" text="Add"></v-btn>
-            <v-btn size="x-small" class="button" text="Reset" @click="reset"></v-btn>
-            <v-btn size="x-small" class="button" text="Generate" @click="generate"></v-btn>
+            <v-btn size="x-small" class="button" text="Generate!" @click="generate"></v-btn>
           </v-row>
         </v-form>
       </div>
@@ -111,6 +113,7 @@ window.visualViewport?.addEventListener("resize", () => {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .topics-container {
@@ -122,8 +125,8 @@ window.visualViewport?.addEventListener("resize", () => {
 
 .buttons-container {
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  align-items: center;
+  width: 80%;
 }
 
 .topic {
