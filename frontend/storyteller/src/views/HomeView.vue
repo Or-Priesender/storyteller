@@ -72,7 +72,7 @@ window.visualViewport?.addEventListener("resize", () => {
             @click:append-inner.prevent="add"
           />
 
-          <v-row class="ma-4 buttons-container" align-content="space-around">
+          <v-row class="ma-4 buttons-container">
             <v-btn size="x-small" class="button" text="Generate!" @click="generate"></v-btn>
           </v-row>
         </v-form>
@@ -92,7 +92,7 @@ window.visualViewport?.addEventListener("resize", () => {
   display: flex;
   flex-wrap: wrap;
   font-size: 1.2rem;
-  margin: 0 1.2rem;
+  margin: 1.2rem;
   flex: 1;
   font-weight: 500;
   align-items: center;
@@ -130,6 +130,6 @@ window.visualViewport?.addEventListener("resize", () => {
 }
 
 .topic {
-  margin: 2rem;
+  margin: 0.5rem;
 }
 </style>
