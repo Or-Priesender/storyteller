@@ -123,7 +123,7 @@ window.visualViewport?.addEventListener("resize", () => {
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  width: 50vw;
+  width: 50%;
 }
 
 .topic {

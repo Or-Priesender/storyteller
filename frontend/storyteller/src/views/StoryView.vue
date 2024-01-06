@@ -9,7 +9,7 @@ import Story from '@/components/Story.vue'
         </template>
 
         <template #fallback>
-            <v-skeleton-loader color="#ECF8F8" loading-text="Generating Story" type="article, sentences@4" class="loader" />
+            <v-skeleton-loader color="blueviolet" loading-text="Generating Story" type="article, sentences@2" class="loader" />
         </template>
     </Suspense>
 </template>
