@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Logo from '@/components/Logo.vue'
 </script>
 
 <template>
-  <v-sheet class="container" elevation="4">
+  <v-sheet class="container" elevation="2">
       <Logo></Logo>
       <RouterView />
   </v-sheet>
@@ -18,8 +18,9 @@ import Logo from '@/components/Logo.vue'
   text-align: center;
   align-items: center;
   background-color: var(--color-card);
+  border-radius: 25px;
   padding: 1rem;
-  height: 85vh;
+  flex: 1;
 }
 
 header {

@@ -31,13 +31,20 @@
 
 /* semantic color variables for this project */
  :root {
-  --color-background: var(--var-light-brown);
+  /* --color-background: var(--var-light-brown);
   --color-logo: var(--var-pink);
   --color-text: var(--var-pink);
   --color-error-text: var(--var-pink);
   --color-pages: var(--var-pink);
   --color-button: var(--var-pink);
-  --color-card: var(--var-light-blue);
+  --color-card: var(--var-light-blue); */
+  --color-background: white;
+  --color-logo: blueviolet;
+  --color-text: blueviolet;
+  --color-error-text: red;
+  --color-pages: blueviolet;
+  --color-button: blueviolet;
+  --color-card: white;
   --section-gap: 160px;
 }
 

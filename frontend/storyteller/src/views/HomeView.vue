@@ -1,41 +1,37 @@
 <script setup lang="ts" module="true">
 import { ref, type Ref } from 'vue';
-import { store } from '@/store/store'
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
 const topics: Ref<string[]> = ref([])
 const text: Ref<string> = ref("")
-const topicsForm: Ref<HTMLFormElement | null> = ref(null)
 const input: Ref<HTMLInputElement | undefined> = ref()
-const rules = [
-  (v: string) => !!v || 'Topic must not be empty',
-  (v: string) => (v && v.length > 2) || 'Topic must be longer than 2 characters'
-]
 
 const validateTopic = (topic: string) => {
   return topic && topic.length > 2
 }
 
-const addTopic = () => {
+const addTopic = (topic: string) => {
   if (topics.value.length == 5) {
     // FIFO the topics list
     topics.value.shift()
-    topics.value.push(text.value)
-  } else {
-    topics.value.push(text.value)
   }
+
+  topics.value.push(topic)
   text.value = ""
 }
 
 const generate = async (event: SubmitEvent) => {
+  if (topics.value.length === 0) {
+    return
+  }
+
   await router.push({name: 'story', query: {topics: topics.value}})
 }
 
 const reset = () => {
   topics.value = []
   text.value = ""
-  topicsForm?.value?.reset()
 }
 
 const add = () => {
@@ -43,11 +39,10 @@ const add = () => {
     return
   }
 
-  addTopic()
+  addTopic(text.value)
 }
 
 window.visualViewport?.addEventListener("resize", () => {
-  console.log("visual view port resized")
   input.value?.scrollIntoView()
 })
 </script>
@@ -55,28 +50,26 @@ window.visualViewport?.addEventListener("resize", () => {
 <template>
       <div class="home">
         <div class="instructions">
-          Add up to 5 topics, then hit "Generate" to generate a story
+          Generate a children book, using GPT for text and DALL-E for images
         </div>
-        <v-form class="topics-form" ref="topicsForm">
+        <v-form class="topics-form">
           <div class="topics-container">
-            <v-chip close @click:close="reset" variant="outlined" class="topic ma-2"  v-for="topic in topics">{{ topic }}
+            <v-chip variant="outlined" class="topic ma-2"  v-for="topic in topics">{{ topic }}
             </v-chip>
           </div>
           <v-text-field
             id="input"
             class="input"
             ref="input"
-            validate-on="lazy submit"
             variant="outlined" 
             label="Insert topic" 
             type="text" 
-            density="compact" 
+            density="compact"
             v-model="text"
-            :rules="rules" 
           />
 
           <v-row class="ma-4 buttons-container" align-content="space-around">
-            <v-btn type="submit" size="x-small" class="button" text="Add" @click="add"></v-btn>
+            <v-btn @click.prevent="add" type="submit" size="x-small" class="button" text="Add"></v-btn>
             <v-btn size="x-small" class="button" text="Reset" @click="reset"></v-btn>
             <v-btn size="x-small" class="button" text="Generate" @click="generate"></v-btn>
           </v-row>

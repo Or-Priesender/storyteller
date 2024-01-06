@@ -39,7 +39,6 @@ const pages = mergeTextAndImages(store.generatedStory, store.generatedImages)
 
 
 const goBack = async () => {
-    console.log("goBack is called")
     router.back()
 }
 

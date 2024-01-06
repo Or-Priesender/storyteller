@@ -2,22 +2,22 @@ import { reactive, ref } from 'vue'
 import { GrpcWebFetchTransport } from '@protobuf-ts/grpcweb-transport'
 import { StoryGeneratorClient } from '@/client/api.client'
 
-const client = new StoryGeneratorClient(new GrpcWebFetchTransport({ "baseUrl": import.meta.env.PROD ? "https://storyteller-proxy-2v74mbo73q-zf.a.run.app" : "http://127.0.0.1:8080" }))
-
-// This is needed because Typescript insists on assigning "never[]" to empty arrays
-const emptyArray: any[] = []
+const client = new StoryGeneratorClient(
+    new GrpcWebFetchTransport({
+        "baseUrl": import.meta.env.PROD ? "https://storyteller-proxy-2v74mbo73q-zf.a.run.app" : "http://127.0.0.1:8080"
+    })
+)
 
 export const store = reactive({
     topics: [""],
-    generatedStory: emptyArray,
-    generatedImages: emptyArray,
+    generatedStory: new Array(),
+    generatedImages: new Array(),
     generatedStoryError: "",
     loading: false,
     client: client,
     resetStory() {
-        console.log("Resetting story")
-        this.generatedStory = emptyArray
-        this.generatedImages = emptyArray
+        this.generatedStory = new Array()
+        this.generatedImages = new Array()
     },
     async generateStory(topics: string[], length: number = 200) {
         const story = await this.client.generateStory({ topics: topics, length: length })
