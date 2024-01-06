@@ -50,7 +50,7 @@ window.visualViewport?.addEventListener("resize", () => {
 <template>
       <div class="home">
         <div class="instructions">
-          Generate a children book, using GPT for text and DALL-E for images
+          Generate a children's book, using GPT for text and DALL-E for images
         </div>
         <v-form class="topics-form">
           <div class="topics-container">
@@ -62,7 +62,7 @@ window.visualViewport?.addEventListener("resize", () => {
             class="input"
             ref="input"
             variant="outlined" 
-            label="Insert topic" 
+            label="topic" 
             type="text" 
             density="compact"
             v-model="text"
@@ -98,7 +98,7 @@ window.visualViewport?.addEventListener("resize", () => {
 
 .input {
   margin-top: 1rem;
-  width: 30vw;
+  width: 80%;
   color: var(--color-text);
 }
 

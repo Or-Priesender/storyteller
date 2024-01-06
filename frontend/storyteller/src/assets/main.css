@@ -1,11 +1,10 @@
 @import './base.css';
 
 #app {
-  /* background-image: url("@/assets/background.png"); */
-  max-width: 1280px;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
-  padding: 2vh 5vw;
+  padding: 10%;
   font-weight: normal;
   scroll-behavior: smooth;
   display: flex;
